@@ -1,0 +1,9 @@
+<div class="card-body">
+
+    <div *ngFor="let member of members" class="col mb-4">
+        <gc-card-user-tile 
+            [userName]="member.userName"
+            [userEmail]="member.userEmail"
+        ></gc-card-user-tile>
+    </div>
+</div>

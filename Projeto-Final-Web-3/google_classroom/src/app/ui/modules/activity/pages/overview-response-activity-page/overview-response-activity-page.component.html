@@ -1,0 +1,26 @@
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+</div>
+
+<div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="m-0">Respostas</h3>
+        <div *ngIf="!userIsCreator">
+            <button class="btn btn-primary" (click)="openCreateResponseActivityForm()">Adicionar Resposta</button>
+        </div>
+    </div>
+
+    <div *ngFor="let response of loadedResponses" class="col mb-4">
+        <gc-card-response-activity-tile 
+            [userIsCreator]="userIsCreator"
+            [userId]="userId"
+            [responseId]="response.responseId"
+            [responseActivityId]="response.responseActivityId"
+            [responseUserId]="response.responseUserId"
+            [responseUserName]="response.responseUserName"
+            [responseText]="response.responseText"
+            [responseCreatedAt]="response.responseCreatedAt"
+            [responseUpdatedAt]="response.responseUpdatedAt"
+        ></gc-card-response-activity-tile>
+    </div>
+</div>

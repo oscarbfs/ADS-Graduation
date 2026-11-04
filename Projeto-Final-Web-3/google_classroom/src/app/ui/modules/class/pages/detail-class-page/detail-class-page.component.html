@@ -1,0 +1,46 @@
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+</div>
+
+<div class="card-header d-flex justify-content-between align-items-center">
+    <button class="btn btn-secondary" (click)="goBack()">Voltar</button>
+    <h2 class="m-0">Detalhes da Turma</h2>
+    <div *ngIf="userIsCreator; else nonCreatorButtons">
+        <button class="btn btn-primary" (click)="openUpdateClassForm()">Editar</button>
+        <button class="btn btn-danger" (click)="openDeleteClassDialog()">Deletar</button>
+    </div>
+    <ng-template #nonCreatorButtons>
+        <button class="btn btn-secondary" (click)="openLeaveClassDialog()">Sair da Turma</button>
+    </ng-template>
+</div>
+
+<div class="card-body" *ngIf="classToDetail">
+    <mat-tab-group>
+        <mat-tab label="Mural">
+            <div class="mt-3">
+                <gc-data-class-component
+                    [classData]="classToDetail"
+                ></gc-data-class-component>
+                <gc-overview-warning-page
+                    [classId]="classToDetail.classId"
+                    [userId]="userId"
+                ></gc-overview-warning-page>
+            </div>
+        </mat-tab>
+        <mat-tab label="Atividades">
+            <div class="mt-3">
+                <gc-overview-activity-page
+                    [classId]="classToDetail.classId"
+                    [userIsCreator]="userIsCreator"
+                ></gc-overview-activity-page>
+            </div>
+        </mat-tab>
+        <mat-tab label="Pessoas">
+            <div class="mt-3">
+                <gc-overview-user-page
+                    [members]="classToDetail.classMembers"
+                ></gc-overview-user-page>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
